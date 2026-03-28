@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 
-def refuse_cookies(page):
+def refuse_cookies(page: Page):
     id_cookie_bar = "siteCookies__form"
     id_cookie_settings = "cookiesSettings"
     id_button_refuse = "buttonCookiesTurnOff"
@@ -15,20 +15,20 @@ def refuse_cookies(page):
         expect(refuse_button).to_be_visible()
         refuse_button.click()
 
-def test_pridat_do_kosiku(page: Page):
-    page.goto("https://www.kancelar24.cz/zbozi/kancelarska-zidle-ramiro--cerna/")
 
-    refuse_cookies(page)
-
+def add_product_to_cart_and_open_cart(page: Page, product_url: str):
     id_add_to_cart_button = "buttonAddToCart"
     id_popup_advanced_order = "popupAdvancedOrder"
     id_button_continue_to_cart = "buttonPopupCart"
-    id_cart_product = "cartProductName"
+
+    page.goto(product_url)
+    refuse_cookies(page)
 
     product_form = page.locator("#product-detail-form")
     add_to_cart_button = product_form.locator(f"[data-testid='{id_add_to_cart_button}']")
     expect(add_to_cart_button).to_be_visible()
-    product_name = page.locator("div.p-detail-inner-header > h1").inner_text()
+
+    product_name = page.locator("div.p-detail-inner-header > h1").inner_text().strip()
     add_to_cart_button.click()
 
     popup_advanced_order = page.locator(f"[data-testid='{id_popup_advanced_order}']")
@@ -38,8 +38,4 @@ def test_pridat_do_kosiku(page: Page):
     expect(button_continue_to_cart).to_be_visible()
     button_continue_to_cart.click()
 
-    cart_product = page.locator(f"[data-testid='{id_cart_product}']")
-    expect(cart_product).to_be_visible()
-    cart_product_name = cart_product.inner_text()
-
-    assert product_name.strip().lower() == cart_product_name.strip().lower()
+    return product_name
