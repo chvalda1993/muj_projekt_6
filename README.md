@@ -3,7 +3,7 @@
 ## Popis projektu
 Projekt obsahuje automatizované UI testy e-shopu kancelar24.cz pomocí nástrojů Playwright a pytest.
 
-Testy ověřují základní funkčnost e-shopu z pohledu uživatele.
+Testy ověřují základní funkčnost e-shopu z pohledu uživatele. Testy jsou rozděleny do více souborů pro lepší přehlednost a znovupoužitelnost kódu.
 
 ---
 
