@@ -35,6 +35,8 @@ Testy ověřují základní funkčnost e-shopu z pohledu uživatele.
 ---
 
 ## Struktura projektu
+```text
+
 tests/
 ├── test_pridat_do_kosiku.py
 ├── test_odebrat_z_kosiku.py
@@ -44,7 +46,7 @@ tests/
 
 - `helpers.py` – pomocné funkce (odmítnutí cookies, přidání produktu do košíku a přechod do košíku)
 - `conftest.py` – sdílené fixture (vyčištění košíku)
-
+```
 ---
 
 ## Spuštění projektu
